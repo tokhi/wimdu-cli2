@@ -6,11 +6,11 @@ from the project root:
 
 2. ruby db.rb config
 
-3. ruby wimducli.rb new 
+3. ruby bin/wimducli.rb new 
 
-4. ruby wimducli.rb list
+4. ruby bin/wimducli.rb list
 
-5. ruby wimducli.rb continue <id>
+5. ruby bin/wimducli.rb continue <id>
 
 
 
