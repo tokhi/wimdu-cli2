@@ -115,10 +115,25 @@ class Wimdu < Thor
     query = "UPDATE flats SET title= '#{result['title']}', propertyType='#{result['property_type']}', address='#{result['address']}',nightlyRate=#{result['nightly_rate']}, maxGuests=#{result['num_guest']}, email='#{result['email']}', phone='#{result['phone']}' WHERE id='#{id}'"
 
     @db.execute query
+    say("Great job! Listing #{id} is complete!")
 
+  rescue SystemExit, Interrupt
+    if result['nightly_rate'].eql? nil
+      result['nightly_rate'] = 0
+    end
+    if result['num_guest'].eql? nil
+      result['num_guest'] = 0
+    end
+    query = "UPDATE flats SET title= '#{result['title']}', propertyType='#{result['property_type']}', address='#{result['address']}',nightlyRate=#{result['nightly_rate']}, maxGuests=#{result['num_guest']}, email='#{result['email']}', phone='#{result['phone']}' WHERE id='#{id}'"
+    result = @db.execute query
+  rescue SQLite3::Exception => e
+    say 'Error while updating data!'
   end
+
+
 
 end
 
 
 Wimdu.start
+
